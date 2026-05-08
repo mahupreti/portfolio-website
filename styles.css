@@ -332,12 +332,12 @@ ul {
   background-size: cover;
   background-position: center 30%;
   background-repeat: no-repeat;
-  opacity: 0.18;
+  opacity: 0.32;
   transition: opacity 0.4s ease;
 }
 
 [data-theme="light"] .hero__photo {
-  opacity: 0.12;
+  opacity: 0.22;
 }
 
 .hero__overlay {
