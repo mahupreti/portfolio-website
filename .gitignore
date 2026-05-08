@@ -8,6 +8,9 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
+# Windows Zone Identifier files (created when downloading files on Windows)
+*:Zone.Identifier
+
 # Editor directories
 .vscode/
 .idea/
