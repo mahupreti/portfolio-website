@@ -2,7 +2,7 @@
 
 Personal portfolio website for Mahesh Upreti, CloudOps Engineer & AI Enthusiast.
 
-Live at: [maheshupreti.com](https://maheshupreti.com)
+Live at: [maheshupreti.com.np](https://maheshupreti.com.np)
 
 ---
 
@@ -79,4 +79,4 @@ Custom domain is configured via Cloudflare Pages → Custom Domains.
 
 ---
 
-&copy; 2026 Mahesh Upreti
+&copy; 2026 Mahesh Upreti — Created with ❤️ from AI
