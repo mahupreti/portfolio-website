@@ -748,6 +748,21 @@ ul {
   color: var(--color-text-dim);
 }
 
+.project-card__github {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.project-card__github:hover {
+  color: var(--color-primary-light);
+}
+
 /* ============================================
    Experience / Timeline
    ============================================ */
