@@ -1,0 +1,12 @@
+{
+  "posts": [
+    {
+      "slug": "repochat-copilot-cli-challenge",
+      "title": "RepoChat — chat with any GitHub repo from your terminal",
+      "date": "2026-05-23",
+      "excerpt": "My submission to the GitHub Copilot CLI Challenge — a CLI that turns Copilot into a project-wide code-intelligence tool. Demo video inside.",
+      "tags": ["copilot", "cli", "ai", "github"],
+      "readingTime": "4 min watch"
+    }
+  ]
+}

@@ -21,6 +21,8 @@
 </head>
 <body>
 
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
   <!-- Navigation -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="container nav__inner">
@@ -33,7 +35,9 @@
         <li><a href="#stack">Stack</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#work">Work</a></li>
+        <li><a href="#goodies">Goodies</a></li>
         <li><a href="#credentials">Credentials</a></li>
+        <li><a href="#writing">Writing</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
 
@@ -56,6 +60,35 @@
 
   <!-- Hero -->
   <header class="hero" id="hero">
+    <div class="hero__sky" aria-hidden="true">
+      <svg class="hero__cloud hero__cloud--1" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="55" cy="65" rx="38" ry="22"/>
+        <ellipse cx="95"  cy="52" rx="48" ry="28"/>
+        <ellipse cx="140" cy="62" rx="38" ry="24"/>
+      </svg>
+      <svg class="hero__cloud hero__cloud--2" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="55" cy="65" rx="38" ry="22"/>
+        <ellipse cx="95"  cy="52" rx="48" ry="28"/>
+        <ellipse cx="140" cy="62" rx="38" ry="24"/>
+      </svg>
+      <svg class="hero__cloud hero__cloud--3" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="55" cy="65" rx="38" ry="22"/>
+        <ellipse cx="95"  cy="52" rx="48" ry="28"/>
+        <ellipse cx="140" cy="62" rx="38" ry="24"/>
+      </svg>
+      <svg class="hero__cloud hero__cloud--4" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="55" cy="65" rx="38" ry="22"/>
+        <ellipse cx="95"  cy="52" rx="48" ry="28"/>
+        <ellipse cx="140" cy="62" rx="38" ry="24"/>
+      </svg>
+
+      <span class="hero__packet hero__packet--1"></span>
+      <span class="hero__packet hero__packet--2"></span>
+      <span class="hero__packet hero__packet--3"></span>
+      <span class="hero__packet hero__packet--4"></span>
+      <span class="hero__packet hero__packet--5"></span>
+      <span class="hero__packet hero__packet--6"></span>
+    </div>
     <div class="container hero__inner">
       <div class="hero__status animate-in">
         <span class="status-dot" aria-hidden="true"></span>
@@ -104,6 +137,53 @@
     </div>
   </header>
 
+  <!-- Tech marquee — infinite scroll, decorative -->
+  <aside class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span class="marquee__item">AWS</span>
+      <span class="marquee__item">Kubernetes</span>
+      <span class="marquee__item">Terraform</span>
+      <span class="marquee__item">Jenkins</span>
+      <span class="marquee__item">Docker</span>
+      <span class="marquee__item">Prometheus</span>
+      <span class="marquee__item">Grafana</span>
+      <span class="marquee__item">Loki</span>
+      <span class="marquee__item">Bedrock</span>
+      <span class="marquee__item">Python</span>
+      <span class="marquee__item">Bash</span>
+      <span class="marquee__item">Ansible</span>
+      <span class="marquee__item">GCP</span>
+      <span class="marquee__item">Azure</span>
+      <span class="marquee__item">EKS Fargate</span>
+      <span class="marquee__item">Helm</span>
+      <span class="marquee__item">CloudWatch</span>
+      <span class="marquee__item">PostgreSQL</span>
+      <span class="marquee__item">MongoDB</span>
+      <span class="marquee__item">Airflow</span>
+      <!-- duplicated for seamless loop -->
+      <span class="marquee__item">AWS</span>
+      <span class="marquee__item">Kubernetes</span>
+      <span class="marquee__item">Terraform</span>
+      <span class="marquee__item">Jenkins</span>
+      <span class="marquee__item">Docker</span>
+      <span class="marquee__item">Prometheus</span>
+      <span class="marquee__item">Grafana</span>
+      <span class="marquee__item">Loki</span>
+      <span class="marquee__item">Bedrock</span>
+      <span class="marquee__item">Python</span>
+      <span class="marquee__item">Bash</span>
+      <span class="marquee__item">Ansible</span>
+      <span class="marquee__item">GCP</span>
+      <span class="marquee__item">Azure</span>
+      <span class="marquee__item">EKS Fargate</span>
+      <span class="marquee__item">Helm</span>
+      <span class="marquee__item">CloudWatch</span>
+      <span class="marquee__item">PostgreSQL</span>
+      <span class="marquee__item">MongoDB</span>
+      <span class="marquee__item">Airflow</span>
+    </div>
+  </aside>
+
   <main>
 
     <!-- About -->
@@ -135,7 +215,7 @@
             </p>
           </div>
 
-          <aside class="about__side reveal" style="--delay: 0.2s">
+          <aside class="about__side reveal reveal--right" style="--delay: 0.2s">
             <figure class="about__portrait">
               <img src="images/profle.jpg" alt="Portrait of Mahesh Upreti" />
             </figure>
@@ -273,7 +353,7 @@
         </div>
 
         <ol class="timeline">
-          <li class="timeline__item reveal">
+          <li class="timeline__item reveal reveal--left">
             <div class="timeline__rail" aria-hidden="true">
               <span class="timeline__node"></span>
             </div>
@@ -296,7 +376,7 @@
             </div>
           </li>
 
-          <li class="timeline__item reveal" style="--delay: 0.1s">
+          <li class="timeline__item reveal reveal--left" style="--delay: 0.1s">
             <div class="timeline__rail" aria-hidden="true">
               <span class="timeline__node"></span>
             </div>
@@ -321,7 +401,7 @@
             </div>
           </li>
 
-          <li class="timeline__item reveal" style="--delay: 0.2s">
+          <li class="timeline__item reveal reveal--left" style="--delay: 0.2s">
             <div class="timeline__rail" aria-hidden="true">
               <span class="timeline__node"></span>
             </div>
@@ -357,7 +437,7 @@
 
         <div class="work__list">
 
-          <article class="work-item reveal">
+          <article class="work-item reveal reveal--right">
             <div class="work-item__meta">
               <span class="work-item__index">01</span>
               <span class="work-item__year">2023</span>
@@ -382,7 +462,7 @@
             </div>
           </article>
 
-          <article class="work-item reveal" style="--delay: 0.1s">
+          <article class="work-item reveal reveal--right" style="--delay: 0.1s">
             <div class="work-item__meta">
               <span class="work-item__index">02</span>
               <span class="work-item__year">2023</span>
@@ -412,12 +492,53 @@
       </div>
     </section>
 
+    <!-- Goodies: published tools / modules / scripts -->
+    <section class="section goodies" id="goodies">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__label">// 05 — goodies</p>
+          <h2 class="section__title">Little things I've built<span class="serif-italic">.</span></h2>
+          <p class="section__sub">
+            Tools that come in handy day-to-day, plus a few I built just for the fun
+            of it. Take what's useful, ignore the rest.
+          </p>
+        </div>
+
+        <!-- To add another tool, copy the <article class="goodie-card"> block below and update the fields. -->
+        <div class="goodies__grid">
+
+          <article class="goodie-card reveal reveal--pop float-ambient">
+            <header class="goodie-card__head">
+              <span class="goodie-card__type">CLI</span>
+              <a class="goodie-card__link" href="https://github.com/mahupreti/repochat" target="_blank" rel="noopener noreferrer" aria-label="View RepoChat on GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+              </a>
+            </header>
+            <h3 class="goodie-card__title">RepoChat</h3>
+            <p class="goodie-card__desc">
+              Chat with any GitHub repository from your terminal. Indexes the whole
+              project and routes questions through the official GitHub Copilot CLI —
+              so there are no API keys, no third-party LLM dashboards to trust.
+              Built for the <em>GitHub Copilot CLI Challenge</em>.
+            </p>
+            <code class="goodie-card__install">$ pip install git+https://github.com/mahupreti/repochat.git</code>
+            <ul class="goodie-card__tags">
+              <li>python</li><li>cli</li><li>github-copilot</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
     <!-- Credentials: certs + education + awards + community -->
     <section class="section credentials" id="credentials">
       <div class="container">
         <div class="section__head reveal">
-          <p class="section__label">// 05 — credentials</p>
-          <h2 class="section__title">Certifications, education &amp; recognition<span class="serif-italic">.</span></h2>
+          <p class="section__label">// 06 — credentials</p>
+          <h2 class="section__title">Certifications, Education &amp; Recognition<span class="serif-italic">.</span></h2>
         </div>
 
         <div class="credentials__block reveal">
@@ -529,11 +650,35 @@
       </div>
     </section>
 
+    <!-- Writing -->
+    <section class="section writing" id="writing">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__label">// 07 — writing</p>
+          <h2 class="section__title">Thoughts, written down<span class="serif-italic">.</span></h2>
+          <p class="section__sub">
+            Short notes on whatever's caught my attention — cloud and code show up
+            a lot, but also ideas, books, and the occasional tangent into something
+            completely unrelated.
+          </p>
+        </div>
+
+        <div class="writing__list" id="writingList" aria-live="polite">
+          <p class="writing__empty">Loading recent posts…</p>
+        </div>
+
+        <a href="blog.html" class="writing__all">
+          <span>Read all posts</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
     <!-- Contact -->
     <section class="section contact" id="contact">
       <div class="container">
         <div class="section__head reveal">
-          <p class="section__label">// 06 — contact</p>
+          <p class="section__label">// 08 — contact</p>
           <h2 class="section__title">Let's build something reliable<span class="serif-italic">.</span></h2>
           <p class="section__sub">
             Have an infrastructure problem worth solving, or just want to compare notes on
@@ -542,7 +687,7 @@
         </div>
 
         <div class="contact__grid">
-          <form class="contact__form reveal" style="--delay: 0.1s" id="contactForm" novalidate>
+          <form class="contact__form reveal reveal--left" style="--delay: 0.1s" id="contactForm" novalidate>
             <div class="form__group">
               <label for="name" class="form__label">Name</label>
               <input type="text" id="name" name="name" class="form__input" placeholder="Your name" required />
@@ -563,7 +708,7 @@
             </button>
           </form>
 
-          <aside class="contact__info reveal" style="--delay: 0.2s">
+          <aside class="contact__info reveal reveal--right float-ambient" style="--delay: 0.2s">
             <div class="contact__info-block">
               <p class="contact__info-label">Email</p>
               <a class="contact__info-value" href="mailto:maheshupretiofficial@gmail.com">maheshupretiofficial@gmail.com</a>
