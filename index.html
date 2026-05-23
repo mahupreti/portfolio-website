@@ -3,517 +3,609 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mahesh Upreti — CloudOps Engineer</title>
+  <title>Mahesh Upreti — Cloud Operations Engineer</title>
+  <meta name="description" content="Mahesh Upreti is a Cloud Operations Engineer specialising in scalable infrastructure, secure automation, and cloud-native AI systems." />
+  <meta name="theme-color" content="#0B0F1A" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F6F7F9" media="(prefers-color-scheme: light)" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script>
-    // Apply theme immediately to prevent flash of wrong theme
-    (function() {
-      var theme = localStorage.getItem('theme') ||
-        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
       document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
 </head>
 <body>
+
   <!-- Navigation -->
   <nav class="nav" id="nav" aria-label="Main navigation">
-    <div class="nav__inner">
+    <div class="container nav__inner">
       <a href="#hero" class="nav__logo" aria-label="Home">
-        <span class="nav__logo-symbol">&lt;</span>MU<span class="nav__logo-symbol">/&gt;</span>
+        <span class="nav__logo-mark">/</span><span class="nav__logo-text">mahesh upreti</span>
       </a>
-      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark and light mode">
-        <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" aria-hidden="true">
-          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
+
       <ul class="nav__links" id="navLinks" role="list">
         <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#stack">Stack</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#awards">Awards</a></li>
-        <li><a href="#community">Community</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#credentials">Credentials</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+
+      <div class="nav__actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark and light mode">
+          <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="hero__bg">
-      <div class="hero__grid"></div>
-      <div class="hero__photo" style="background-image: url('images/hero-bg.jpg')"></div>
-      <div class="hero__overlay"></div>
-      <div class="hero__glow hero__glow--1"></div>
-      <div class="hero__glow hero__glow--2"></div>
-    </div>
-    <div class="container hero__content">
-      <p class="hero__greeting animate-in">Hello, I'm</p>
-      <h1 class="hero__name animate-in" style="--delay: 0.1s">Mahesh Upreti</h1>
-      <p class="hero__title animate-in" style="--delay: 0.2s">
-        CloudOps Engineer
+  <!-- Hero -->
+  <header class="hero" id="hero">
+    <div class="container hero__inner">
+      <div class="hero__status animate-in">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="status-text">Available for new collaborations</span>
+        <span class="status-sep" aria-hidden="true">·</span>
+        <span>Pulchowk, Nepal</span>
+        <span class="status-sep" aria-hidden="true">·</span>
+        <span id="localTime">UTC+05:45</span>
+      </div>
+
+      <p class="hero__eyebrow animate-in" style="--delay: 0.05s">// cloud operations engineer</p>
+
+      <h1 class="hero__name animate-in" style="--delay: 0.1s">
+        Mahesh Upreti<span class="serif-italic">.</span>
+      </h1>
+
+      <p class="hero__lede animate-in" style="--delay: 0.2s">
+        I design, automate, and operate the cloud infrastructure that keeps
+        modern products <em>running</em> — quietly, securely, at scale.
       </p>
-      <p class="hero__description animate-in" style="--delay: 0.3s">
-        CloudOps Engineer with experience in cloud operations, automation, and secure infrastructure management.
-        Strong interest in artificial intelligence and cloud-based AI solutions.
-      </p>
-      <div class="hero__actions animate-in" style="--delay: 0.4s">
-        <a href="#projects" class="btn btn--primary">View My Work</a>
-        <a href="#contact" class="btn btn--outline">Get In Touch</a>
+
+      <div class="hero__actions animate-in" style="--delay: 0.3s">
+        <a href="#work" class="btn btn--primary">
+          <span>See selected work</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="16" height="16" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+        <a href="#contact" class="btn btn--ghost">Get in touch</a>
       </div>
-      <div class="hero__scroll animate-in" style="--delay: 0.6s">
-        <div class="hero__scroll-line"></div>
-      </div>
+
+      <dl class="hero__meta animate-in" style="--delay: 0.4s">
+        <div>
+          <dt>Currently</dt>
+          <dd>CloudOps Engineer · Maitri Services</dd>
+        </div>
+        <div>
+          <dt>Focus</dt>
+          <dd>Infrastructure · Automation · AI on the cloud</dd>
+        </div>
+        <div>
+          <dt>Region</dt>
+          <dd>Asia / Kathmandu · open to remote</dd>
+        </div>
+      </dl>
     </div>
-  </section>
+  </header>
 
-  <!-- About Section -->
-  <section class="section about" id="about">
-    <div class="container">
-      <h2 class="section__title reveal">About Me</h2>
-      <div class="about__grid">
-        <div class="about__image reveal">
-          <div class="about__image-wrapper">
-            <div class="about__image-placeholder">
-              <img src="images/profle.jpg" alt="Mahesh Upreti" />
-            </div>
-            <div class="about__image-border"></div>
-          </div>
-        </div>
-        <div class="about__text reveal" style="--delay: 0.15s">
-          <p>
-            I'm a CloudOps Engineer skilled in designing and managing scalable cloud environments,
-            CI/CD pipelines, infrastructure as code, and cloud-native technologies. I have a strong
-            interest in artificial intelligence and cloud-based AI solutions, with a focus on integrating
-            intelligent systems into cloud environments to improve efficiency, automation, and security.
-          </p>
-          <p>
-            I hold a Bachelor's in Electronics, Communication &amp; Information Engineering
-            from IOE, Tribhuvan University. I have also served as Marketing Director at
-            LOCUS at IOE Pulchowk Campus for a one-year tenure.
-          </p>
-          <div class="about__stats">
-            <div class="about__stat">
-              <span class="about__stat-number" data-count="3">0</span>
-              <span class="about__stat-label">Certifications</span>
-            </div>
-            <div class="about__stat">
-              <span class="about__stat-number" data-count="3">0</span><span class="about__stat-plus">+</span>
-              <span class="about__stat-label">Years Experience</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <main>
 
-  <!-- Skills Section -->
-  <section class="section skills" id="skills">
-    <div class="container">
-      <h2 class="section__title reveal">Skills & Tools</h2>
-      <div class="skills__grid">
-        <div class="skill-card reveal" style="--delay: 0s">
-          <div class="skill-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
-          </div>
-          <h3 class="skill-card__title">Cloud & Databases</h3>
-          <div class="skill-card__tags">
-            <span>AWS</span><span>GCP</span><span>Azure</span>
-            <span>PostgreSQL</span><span>MongoDB</span><span>Linux</span>
-          </div>
+    <!-- About -->
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__label">// 01 — about</p>
+          <h2 class="section__title">Engineer first, operator always<span class="serif-italic">.</span></h2>
         </div>
-        <div class="skill-card reveal" style="--delay: 0.1s">
-          <div class="skill-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
-              <line x1="4" y1="22" x2="4" y2="15"/>
-            </svg>
-          </div>
-          <h3 class="skill-card__title">DevOps Tools</h3>
-          <div class="skill-card__tags">
-            <span>Jenkins</span><span>Docker</span><span>Kubernetes</span>
-            <span>Ansible</span><span>Terraform</span><span>Terragrunt</span>
-            <span>ELK Stack</span><span>Prometheus</span><span>Grafana</span>
-            <span>Loki</span><span>OpsManager</span>
-          </div>
-        </div>
-        <div class="skill-card reveal" style="--delay: 0.2s">
-          <div class="skill-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <circle cx="12" cy="12" r="3"/>
-              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-            </svg>
-          </div>
-          <h3 class="skill-card__title">Cloud AI Tools</h3>
-          <div class="skill-card__tags">
-            <span>AWS SageMaker</span><span>AWS Rekognition</span><span>AWS Comprehend</span>
-            <span>AWS Bedrock</span><span>GCP AI</span><span>Azure AI</span>
-          </div>
-        </div>
-        <div class="skill-card reveal" style="--delay: 0.3s">
-          <div class="skill-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-            </svg>
-          </div>
-          <h3 class="skill-card__title">Programming</h3>
-          <div class="skill-card__tags">
-            <span>Python</span><span>Bash</span><span>C</span>
-            <span>C++</span><span>Java</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Certifications Section -->
-  <section class="section certifications" id="certifications">
-    <div class="container">
-      <h2 class="section__title reveal">Certifications</h2>
-      <div class="certs__grid">
-        <div class="cert-card reveal" style="--delay: 0s">
-          <div class="cert-card__badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M12 15l-3 5 1-4-3-2h4L12 9l1 5h4l-3 2 1 4z"/>
-              <circle cx="12" cy="10" r="8"/>
-            </svg>
-          </div>
-          <div class="cert-card__content">
-            <h3 class="cert-card__title">AWS Certified Solutions Architect</h3>
-            <p class="cert-card__issuer">Amazon Web Services</p>
-            <span class="cert-card__date">May 2025</span>
-          </div>
-        </div>
-        <div class="cert-card reveal" style="--delay: 0.1s">
-          <div class="cert-card__badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-          </div>
-          <div class="cert-card__content">
-            <h3 class="cert-card__title">Certified in CyberSecurity</h3>
-            <p class="cert-card__issuer">ISC2</p>
-            <span class="cert-card__date">Nov 2024</span>
-          </div>
-        </div>
-        <div class="cert-card reveal" style="--delay: 0.2s">
-          <div class="cert-card__badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
-          </div>
-          <div class="cert-card__content">
-            <h3 class="cert-card__title">AWS Certified Cloud Practitioner</h3>
-            <p class="cert-card__issuer">Amazon Web Services</p>
-            <span class="cert-card__date">June 2023</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section class="section projects" id="projects">
-    <div class="container">
-      <h2 class="section__title reveal">Projects</h2>
-      <div class="projects__grid">
-
-        <article class="project-card reveal" style="--delay: 0s">
-          <div class="project-card__content">
-            <h3 class="project-card__title">Music Genre Classification</h3>
-            <p class="project-card__description">
-              Developed and trained a deep learning model for music genre classification
-              at IOE Pulchowk Engineering Campus. Designed a neural network-based architecture,
-              performed data preprocessing, feature extraction, and model optimization to
-              improve classification accuracy.
+        <div class="about__grid">
+          <div class="about__copy reveal" style="--delay: 0.1s">
+            <p class="lede">
+              I'm a Cloud Operations Engineer with hands-on experience designing
+              scalable cloud environments, hardening CI/CD pipelines, and managing
+              infrastructure as code across AWS, GCP, and Azure.
             </p>
-            <div class="project-card__tags">
-              <span>Python</span><span>Deep Learning</span><span>Neural Networks</span><span>Feature Extraction</span>
+            <p>
+              My day-to-day sits at the intersection of <em>reliability</em>,
+              <em>security</em>, and <em>automation</em> — provisioning the
+              architecture that runs LLM workloads, instrumenting production with
+              Prometheus, Grafana, and Loki, and writing the pipelines that make
+              everything else boring.
+            </p>
+            <p>
+              I hold a Bachelor's in Electronics, Communication &amp; Information
+              Engineering from IOE, Tribhuvan University, and previously served
+              as Marketing Director at LOCUS, IOE Pulchowk Campus.
+            </p>
+          </div>
+
+          <aside class="about__side reveal" style="--delay: 0.2s">
+            <figure class="about__portrait">
+              <img src="images/profle.jpg" alt="Portrait of Mahesh Upreti" />
+            </figure>
+            <dl class="about__stats">
+              <div>
+                <dt>Years in production</dt>
+                <dd><span data-count="3">0</span><span class="stat__plus">+</span></dd>
+              </div>
+              <div>
+                <dt>Cloud certifications</dt>
+                <dd><span data-count="3">0</span></dd>
+              </div>
+              <div>
+                <dt>Clouds operated</dt>
+                <dd>AWS · GCP · Azure</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stack -->
+    <section class="section stack" id="stack">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__label">// 02 — stack</p>
+          <h2 class="section__title">The tools I reach for<span class="serif-italic">.</span></h2>
+          <p class="section__sub">Grouped by what they do in production — not by what's trending.</p>
+        </div>
+
+        <div class="stack__grid">
+
+          <article class="stack-card reveal">
+            <header class="stack-card__head">
+              <span class="stack-card__num">01</span>
+              <h3>Cloud Platforms</h3>
+            </header>
+            <ul class="stack-card__tags">
+              <li>AWS</li><li>GCP</li><li>Azure</li><li>Linux</li>
+            </ul>
+          </article>
+
+          <article class="stack-card reveal" style="--delay: 0.05s">
+            <header class="stack-card__head">
+              <span class="stack-card__num">02</span>
+              <h3>Infrastructure as Code</h3>
+            </header>
+            <ul class="stack-card__tags">
+              <li>Terraform</li><li>Terragrunt</li><li>Ansible</li><li>CloudFormation</li>
+            </ul>
+          </article>
+
+          <article class="stack-card reveal" style="--delay: 0.1s">
+            <header class="stack-card__head">
+              <span class="stack-card__num">03</span>
+              <h3>Containers &amp; Orchestration</h3>
+            </header>
+            <ul class="stack-card__tags">
+              <li>Docker</li><li>Kubernetes</li><li>EKS</li><li>Fargate</li>
+            </ul>
+          </article>
+
+          <article class="stack-card reveal" style="--delay: 0.15s">
+            <header class="stack-card__head">
+              <span class="stack-card__num">04</span>
+              <h3>CI / CD &amp; Delivery</h3>
+            </header>
+            <ul class="stack-card__tags">
+              <li>Jenkins</li><li>Bitbucket Pipelines</li><li>CodePipeline</li><li>GitHub Actions</li>
+            </ul>
+          </article>
+
+          <article class="stack-card reveal" style="--delay: 0.2s">
+            <header class="stack-card__head">
+              <span class="stack-card__num">05</span>
+              <h3>Observability</h3>
+            </header>
+            <ul class="stack-card__tags">
+              <li>Prometheus</li><li>Grafana</li><li>Loki</li><li>ELK Stack</li><li>CloudWatch</li>
+            </ul>
+          </article>
+
+          <article class="stack-card reveal" style="--delay: 0.25s">
+            <header class="stack-card__head">
+              <span class="stack-card__num">06</span>
+              <h3>Security &amp; Compliance</h3>
+            </header>
+            <ul class="stack-card__tags">
+              <li>AWS Systems Manager</li><li>IAM</li><li>Vulnerability scanning</li><li>Patch automation</li>
+            </ul>
+          </article>
+
+          <article class="stack-card reveal" style="--delay: 0.3s">
+            <header class="stack-card__head">
+              <span class="stack-card__num">07</span>
+              <h3>Data &amp; Databases</h3>
+            </header>
+            <ul class="stack-card__tags">
+              <li>PostgreSQL</li><li>MongoDB</li><li>Ops Manager</li><li>Airflow</li>
+            </ul>
+          </article>
+
+          <article class="stack-card reveal" style="--delay: 0.35s">
+            <header class="stack-card__head">
+              <span class="stack-card__num">08</span>
+              <h3>AI on the Cloud</h3>
+            </header>
+            <ul class="stack-card__tags">
+              <li>AWS Bedrock</li><li>SageMaker</li><li>Rekognition</li><li>Comprehend</li><li>GCP AI</li><li>Azure AI</li>
+            </ul>
+          </article>
+
+          <article class="stack-card reveal" style="--delay: 0.4s">
+            <header class="stack-card__head">
+              <span class="stack-card__num">09</span>
+              <h3>Languages</h3>
+            </header>
+            <ul class="stack-card__tags">
+              <li>Python</li><li>Bash</li><li>C</li><li>C++</li><li>Java</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section experience" id="experience">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__label">// 03 — experience</p>
+          <h2 class="section__title">Deployment history<span class="serif-italic">.</span></h2>
+          <p class="section__sub">A small, chronological log of where I've shipped infrastructure.</p>
+        </div>
+
+        <ol class="timeline">
+          <li class="timeline__item reveal">
+            <div class="timeline__rail" aria-hidden="true">
+              <span class="timeline__node"></span>
             </div>
-            <a href="https://github.com/mahupreti" class="project-card__github" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            <div class="timeline__body">
+              <p class="timeline__meta">
+                <span class="timeline__date">Jan 2026 — present</span>
+                <span class="timeline__sep">·</span>
+                <span class="timeline__loc">Maitri Services</span>
+              </p>
+              <h3 class="timeline__title">CloudOps Engineer</h3>
+              <p class="timeline__desc">
+                Deployed automated pipelines that orchestrate AI model execution end-to-end,
+                improving operational efficiency and reliability. Provisioned the supporting
+                architecture as code — servers, queues, and the messaging fabric — that lets
+                LLM components talk to each other safely in production.
+              </p>
+              <ul class="timeline__tags">
+                <li>IaC</li><li>LLM Ops</li><li>Pipelines</li><li>AWS</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal" style="--delay: 0.1s">
+            <div class="timeline__rail" aria-hidden="true">
+              <span class="timeline__node"></span>
+            </div>
+            <div class="timeline__body">
+              <p class="timeline__meta">
+                <span class="timeline__date">Oct 2023 — Jan 2026</span>
+                <span class="timeline__sep">·</span>
+                <span class="timeline__loc">Viveka Services</span>
+              </p>
+              <h3 class="timeline__title">DevSecOps Engineer</h3>
+              <p class="timeline__desc">
+                Architected and supported an AI knowledge base on AWS Bedrock with
+                Anthropic Claude. Automated patch management, compliance checks, and
+                vulnerability scanning via AWS Systems Manager. Deployed Apache Airflow
+                on EKS Fargate and built production ETL pipelines. Designed secure CI/CD
+                pipelines across Jenkins, Bitbucket, and AWS CodePipeline with automated
+                security gates. Stood up real-time observability with Prometheus, Grafana, and Loki.
+              </p>
+              <ul class="timeline__tags">
+                <li>Bedrock</li><li>EKS</li><li>Airflow</li><li>Prometheus</li><li>Security</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="timeline__item reveal" style="--delay: 0.2s">
+            <div class="timeline__rail" aria-hidden="true">
+              <span class="timeline__node"></span>
+            </div>
+            <div class="timeline__body">
+              <p class="timeline__meta">
+                <span class="timeline__date">Jun 2023 — Sep 2023</span>
+                <span class="timeline__sep">·</span>
+                <span class="timeline__loc">Viveka Services</span>
+              </p>
+              <h3 class="timeline__title">DevSecOps Intern</h3>
+              <p class="timeline__desc">
+                Designed and implemented the configuration and infrastructure backbone for
+                Dev, Pre-Prod, and Prod environments — robust, scalable, and secure by default.
+                Built CI/CD pipelines for air-gapped environments with automated deployments
+                and embedded security controls.
+              </p>
+              <ul class="timeline__tags">
+                <li>Air-gapped CI/CD</li><li>Environments</li><li>Hardening</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Work / Projects -->
+    <section class="section work" id="work">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__label">// 04 — selected work</p>
+          <h2 class="section__title">A handful of projects<span class="serif-italic">.</span></h2>
+        </div>
+
+        <div class="work__list">
+
+          <article class="work-item reveal">
+            <div class="work-item__meta">
+              <span class="work-item__index">01</span>
+              <span class="work-item__year">2023</span>
+            </div>
+            <div class="work-item__body">
+              <h3 class="work-item__title">Music Genre Classification</h3>
+              <p class="work-item__desc">
+                A deep-learning model for music genre classification, developed at IOE Pulchowk
+                Engineering Campus. Designed a neural-network architecture, ran feature extraction
+                and preprocessing, and tuned the model end-to-end to lift classification accuracy.
+              </p>
+              <ul class="work-item__tags">
+                <li>Python</li><li>Deep Learning</li><li>Neural Networks</li><li>Feature Extraction</li>
+              </ul>
+              <a class="work-item__link" href="https://github.com/mahupreti" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                <span>View on GitHub</span>
+                <span class="work-item__link-arrow" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="work-item reveal" style="--delay: 0.1s">
+            <div class="work-item__meta">
+              <span class="work-item__index">02</span>
+              <span class="work-item__year">2023</span>
+            </div>
+            <div class="work-item__body">
+              <h3 class="work-item__title">Nepali Paraphrase Generator</h3>
+              <p class="work-item__desc">
+                Led a final-year project on Nepali paraphrase generation in Devanagari script —
+                NLP for low-resource languages. Built and preprocessed a custom dataset,
+                fine-tuned language models, and explored sequence-to-sequence architectures
+                to improve paraphrasing quality.
+              </p>
+              <ul class="work-item__tags">
+                <li>NLP</li><li>Python</li><li>Seq2Seq</li><li>Fine-tuning</li><li>Devanagari</li>
+              </ul>
+              <a class="work-item__link" href="https://github.com/mahupreti" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                <span>View on GitHub</span>
+                <span class="work-item__link-arrow" aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Credentials: certs + education + awards + community -->
+    <section class="section credentials" id="credentials">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__label">// 05 — credentials</p>
+          <h2 class="section__title">Certifications, education &amp; recognition<span class="serif-italic">.</span></h2>
+        </div>
+
+        <div class="credentials__block reveal">
+          <h3 class="credentials__heading">Certifications</h3>
+          <ul class="cert-list">
+            <li class="cert-item">
+              <div class="cert-item__main">
+                <h4>AWS Certified Solutions Architect</h4>
+                <p>Amazon Web Services</p>
+              </div>
+              <span class="cert-item__date">May 2025</span>
+            </li>
+            <li class="cert-item">
+              <div class="cert-item__main">
+                <h4>Certified in Cybersecurity (CC)</h4>
+                <p>ISC2</p>
+              </div>
+              <span class="cert-item__date">Nov 2024</span>
+            </li>
+            <li class="cert-item">
+              <div class="cert-item__main">
+                <h4>AWS Certified Cloud Practitioner</h4>
+                <p>Amazon Web Services</p>
+              </div>
+              <span class="cert-item__date">Jun 2023</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="credentials__block reveal" style="--delay: 0.1s">
+          <h3 class="credentials__heading">Education</h3>
+          <ul class="cert-list">
+            <li class="cert-item">
+              <div class="cert-item__main">
+                <h4>BE in Electronics, Communication &amp; Information Engineering</h4>
+                <p>IOE, Tribhuvan University — 71.15% · IOE Merit-Based Scholarship</p>
+              </div>
+              <span class="cert-item__date">2018 — 2023</span>
+            </li>
+            <li class="cert-item">
+              <div class="cert-item__main">
+                <h4>+2 Science</h4>
+                <p>Damak Multiple Campus, Damak, Jhapa</p>
+              </div>
+              <span class="cert-item__date">2016 — 2018</span>
+            </li>
+            <li class="cert-item">
+              <div class="cert-item__main">
+                <h4>SLC</h4>
+                <p>Himalaya Higher Secondary School, Damak, Jhapa</p>
+              </div>
+              <span class="cert-item__date">2016</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="credentials__block reveal" style="--delay: 0.2s">
+          <h3 class="credentials__heading">Recognition</h3>
+          <ul class="cert-list">
+            <li class="cert-item">
+              <div class="cert-item__main">
+                <h4>AWS 10,000 AIdeas Competition — Semifinalist</h4>
+                <p>
+                  <a class="inline-link" href="https://builder.aws.com/comment/3CiUJoZxWlwjAZNp2E1kyQPjIkZ" target="_blank" rel="noopener noreferrer">View article ↗</a>
+                </p>
+              </div>
+              <span class="cert-item__date">Mar 2026</span>
+            </li>
+            <li class="cert-item">
+              <div class="cert-item__main">
+                <h4>Marketing Director — LOCUS 2023</h4>
+                <p>IOE Pulchowk Campus</p>
+              </div>
+              <span class="cert-item__date">Jan 2022</span>
+            </li>
+            <li class="cert-item">
+              <div class="cert-item__main">
+                <h4>IOE Merit-Based Scholarship</h4>
+                <p>Tribhuvan University</p>
+              </div>
+              <span class="cert-item__date">Nov 2018</span>
+            </li>
+            <li class="cert-item">
+              <div class="cert-item__main">
+                <h4>Mahatma Gandhi Scholarship</h4>
+                <p>Government of India</p>
+              </div>
+              <span class="cert-item__date">Nov 2016</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="credentials__block reveal" style="--delay: 0.3s">
+          <h3 class="credentials__heading">Community</h3>
+          <ul class="cert-list">
+            <li class="cert-item">
+              <div class="cert-item__main">
+                <h4>Children in Technology — Mentor</h4>
+                <p>
+                  Conducted technology-awareness workshops across all seven provinces of Nepal and
+                  led a digital-literacy campaign in a remote village — covering global advances
+                  in science and tech, cybersecurity basics, and safe, responsible social-media use.
+                </p>
+              </div>
+              <span class="cert-item__date">Nepal</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="section__label">// 06 — contact</p>
+          <h2 class="section__title">Let's build something reliable<span class="serif-italic">.</span></h2>
+          <p class="section__sub">
+            Have an infrastructure problem worth solving, or just want to compare notes on
+            cloud automation? I read every message.
+          </p>
+        </div>
+
+        <div class="contact__grid">
+          <form class="contact__form reveal" style="--delay: 0.1s" id="contactForm" novalidate>
+            <div class="form__group">
+              <label for="name" class="form__label">Name</label>
+              <input type="text" id="name" name="name" class="form__input" placeholder="Your name" required />
+            </div>
+            <div class="form__group">
+              <label for="email" class="form__label">Email</label>
+              <input type="email" id="email" name="email" class="form__input" placeholder="you@example.com" required />
+            </div>
+            <div class="form__group">
+              <label for="message" class="form__label">Message</label>
+              <textarea id="message" name="message" class="form__input form__textarea" placeholder="Tell me a little about what you're working on…" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">
+              <span>Send message</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
               </svg>
-              View on GitHub
-            </a>
-          </div>
-        </article>
+            </button>
+          </form>
 
-        <article class="project-card reveal" style="--delay: 0.1s">
-          <div class="project-card__content">
-            <h3 class="project-card__title">Nepali Paraphrase Generator</h3>
-            <p class="project-card__description">
-              Led a final-year major project on Nepali paraphrase generation in Devanagari script,
-              focusing on NLP techniques for low-resource languages. Created and preprocessed a custom
-              dataset, fine-tuned language models, and researched sequence-to-sequence models
-              to enhance paraphrasing accuracy.
-            </p>
-            <div class="project-card__tags">
-              <span>NLP</span><span>Python</span><span>Seq2Seq</span><span>Fine-tuning</span><span>Devanagari</span>
-            </div>
-            <a href="https://github.com/mahupreti" class="project-card__github" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              View on GitHub
-            </a>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <section class="section experience" id="experience">
-    <div class="container">
-      <h2 class="section__title reveal">Experience</h2>
-      <div class="timeline">
-        <div class="timeline__item reveal" style="--delay: 0s">
-          <div class="timeline__dot"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">Jan 2026 — Present</span>
-            <h3 class="timeline__title">CloudOps Engineer</h3>
-            <p class="timeline__company">Maitri Services</p>
-            <p class="timeline__description">
-              Deployed automated pipelines to execute AI model scripts, improving operational
-              efficiency and reliability. Implemented Infrastructure as Code (IaC) to provision
-              architecture, including servers and queues required for running LLM models and
-              enabling communication between components.
-            </p>
-          </div>
-        </div>
-        <div class="timeline__item reveal" style="--delay: 0.1s">
-          <div class="timeline__dot"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">Oct 2023 — Jan 2026</span>
-            <h3 class="timeline__title">DevSecOps Engineer</h3>
-            <p class="timeline__company">Viveka Services</p>
-            <p class="timeline__description">
-              Created the architecture and supported an AI knowledge base using AWS Bedrock and
-              Anthropic Claude. Automated patch management, compliance checks, and vulnerability
-              assessments with AWS Systems Manager. Deployed Apache Airflow on AWS EKS Fargate
-              and built production-ready ETL pipelines. Designed secure CI/CD pipelines using Jenkins,
-              Bitbucket, and AWS CodePipeline with automated security checks. Integrated Prometheus,
-              Grafana, and Loki for real-time monitoring and proactive alerting.
-            </p>
-          </div>
-        </div>
-        <div class="timeline__item reveal" style="--delay: 0.2s">
-          <div class="timeline__dot"></div>
-          <div class="timeline__content">
-            <span class="timeline__date">June 2023 — Sep 2023</span>
-            <h3 class="timeline__title">DevSecOps Intern</h3>
-            <p class="timeline__company">Viveka Services</p>
-            <p class="timeline__description">
-              Designed and implemented configurations and infrastructure for separate environments
-              (Dev, Pre-Prod, Prod), ensuring a robust, scalable, and secure foundation. Developed
-              CI/CD pipelines in air-gapped environments with automated deployments and security controls.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education Section -->
-  <section class="section education" id="education">
-    <div class="container">
-      <h2 class="section__title reveal">Education</h2>
-      <div class="education-card reveal">
-        <div class="education-card__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-            <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>
-          </svg>
-        </div>
-        <div class="education-card__content">
-          <span class="education-card__date">Nov 2018 — April 2023</span>
-          <h3 class="education-card__title">Bachelor's in Electronics, Communication &amp; Information Engineering</h3>
-          <p class="education-card__school">IOE, Tribhuvan University — 71.15%</p>
-          <p class="education-card__details">
-            Coursework: Operating Systems, Computer Networking, Enterprise Computing, Machine Learning.
-            IOE Merit-Based Scholarship recipient.
-          </p>
-        </div>
-      </div>
-      <div class="education-card reveal" style="--delay: 0.15s; margin-top: 24px;">
-        <div class="education-card__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-            <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>
-          </svg>
-        </div>
-        <div class="education-card__content">
-          <span class="education-card__date">2016 — 2018</span>
-          <h3 class="education-card__title">+2</h3>
-          <p class="education-card__school">Damak Multiple Campus, Damak, Jhapa</p>
-        </div>
-      </div>
-      <div class="education-card reveal" style="--delay: 0.3s; margin-top: 24px;">
-        <div class="education-card__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-            <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>
-          </svg>
-        </div>
-        <div class="education-card__content">
-          <span class="education-card__date">2016</span>
-          <h3 class="education-card__title">SLC</h3>
-          <p class="education-card__school">Himalaya Higher Secondary School, Damak, Jhapa</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Awards Section -->
-  <section class="section awards" id="awards">
-    <div class="container">
-      <h2 class="section__title reveal">Awards & Achievements</h2>
-      <div class="awards__grid">
-        <div class="award-card reveal" style="--delay: 0s">
-          <span class="award-card__date">March 2026</span>
-          <h3 class="award-card__title">AWS 10,000 AIdeas Competition — Semifinalist</h3>
-          <a href="https://builder.aws.com/comment/3CiUJoZxWlwjAZNp2E1kyQPjIkZ" class="award-card__link" target="_blank" rel="noopener noreferrer">View Article →</a>
-        </div>
-        <div class="award-card reveal" style="--delay: 0.1s">
-          <span class="award-card__date">Jan 2022</span>
-          <h3 class="award-card__title">LOCUS 2023 — Marketing Director</h3>
-        </div>
-        <div class="award-card reveal" style="--delay: 0.2s">
-          <span class="award-card__date">Nov 2018</span>
-          <h3 class="award-card__title">IOE Merit-Based Scholarship</h3>
-        </div>
-        <div class="award-card reveal" style="--delay: 0.3s">
-          <span class="award-card__date">Nov 2016</span>
-          <h3 class="award-card__title">Mahatma Gandhi Scholarship</h3>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Community Section -->
-  <section class="section community" id="community">
-    <div class="container">
-      <h2 class="section__title reveal">Community Involvement</h2>
-      <div class="community__grid">
-        <div class="community-card reveal" style="--delay: 0s">
-          <div class="community-card__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-            </svg>
-          </div>
-          <h3 class="community-card__title">Children in Technology — Mentor</h3>
-          <p class="community-card__location">Pulchowk, Lalitpur, Nepal</p>
-          <p class="community-card__description">
-            Conducted technology awareness workshops across all 7 provinces of Nepal and led
-            a campaign in a remote village to promote digital literacy among school children.
-            The sessions focused on introducing global advancements in science and technology
-            while raising awareness about cybersecurity, safe and responsible use of social media,
-            and the potential risks of digital misuse.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="section contact" id="contact">
-    <div class="container">
-      <h2 class="section__title reveal">Let's Connect</h2>
-      <p class="contact__subtitle reveal" style="--delay: 0.1s">
-        Have a project in mind or just want to chat? I'd love to hear from you.
-      </p>
-      <div class="contact__grid">
-        <form class="contact__form reveal" style="--delay: 0.15s" id="contactForm" novalidate>
-          <div class="form__group">
-            <label for="name" class="form__label">Name</label>
-            <input type="text" id="name" name="name" class="form__input" placeholder="Your name" required />
-          </div>
-          <div class="form__group">
-            <label for="email" class="form__label">Email</label>
-            <input type="email" id="email" name="email" class="form__input" placeholder="your@email.com" required />
-          </div>
-          <div class="form__group">
-            <label for="message" class="form__label">Message</label>
-            <textarea id="message" name="message" class="form__input form__textarea" placeholder="Tell me about your project..." rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn btn--primary btn--full">
-            <span>Send Message</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </button>
-        </form>
-        <div class="contact__info reveal" style="--delay: 0.25s">
-          <div class="contact__info-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22" aria-hidden="true">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-            <div>
+          <aside class="contact__info reveal" style="--delay: 0.2s">
+            <div class="contact__info-block">
               <p class="contact__info-label">Email</p>
-              <a href="mailto:maheshupretiofficial@gmail.com" class="contact__info-value">maheshupretiofficial@gmail.com</a>
+              <a class="contact__info-value" href="mailto:maheshupretiofficial@gmail.com">maheshupretiofficial@gmail.com</a>
             </div>
-          </div>
-          <div class="contact__info-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            <div>
+            <div class="contact__info-block">
               <p class="contact__info-label">Location</p>
               <p class="contact__info-value">Pulchowk, Lalitpur, Nepal</p>
             </div>
-          </div>
-          <div class="contact__socials">
-            <a href="https://github.com/mahupreti" class="contact__social" aria-label="GitHub profile" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-            </a>
-            <a href="https://www.linkedin.com/in/mahesh-upreti-/" class="contact__social" aria-label="LinkedIn profile" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </a>
-            <a href="https://dev.to/mahupreti" class="contact__social" aria-label="Dev.to profile" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true">
-                <path d="M7.42 10.05c-.18-.16-.46-.23-.84-.23H6v4.36h.58c.37 0 .67-.08.84-.23.2-.17.31-.47.31-.95v-2c0-.49-.12-.79-.31-.95zm13.37-7.55H3.21C1.99 2.5 1 3.49 1 4.71v14.58c0 1.22.99 2.21 2.21 2.21h17.58c1.22 0 2.21-.99 2.21-2.21V4.71c0-1.22-.99-2.21-2.21-2.21zM8.54 14.31c0 .73-.28 1.3-.77 1.71-.49.4-1.17.6-2.02.6H3.8V7.38h1.97c.83 0 1.5.2 1.99.6.49.41.78.98.78 1.71v4.62zm4.95-5.22h-2.6v2.04h1.58v1.71h-1.58v2.04h2.6v1.71h-2.93c-.67 0-1.38-.47-1.38-1.14V8.52c0-.67.71-1.14 1.38-1.14h2.93v1.71zm5.68 5.56c-.29.7-.93 1.14-1.71 1.14-.78 0-1.42-.44-1.71-1.14l-1.89-7.27h1.93l1.2 5.2 1.2-5.2h1.93l-1.95 7.27z"/>
-              </svg>
-            </a>
-            <a href="https://maheshupreti.com.np" class="contact__social" aria-label="Personal website" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
-            </a>
-          </div>
+            <div class="contact__info-block">
+              <p class="contact__info-label">Elsewhere</p>
+              <ul class="contact__socials" role="list">
+                <li>
+                  <a href="https://github.com/mahupreti" target="_blank" rel="noopener noreferrer">
+                    GitHub <span aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/in/mahesh-upreti-/" target="_blank" rel="noopener noreferrer">
+                    LinkedIn <span aria-hidden="true">↗</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://dev.to/mahupreti" target="_blank" rel="noopener noreferrer">
+                    Dev.to <span aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer__inner">
-      <p>&copy; 2026 Mahesh Upreti. Built with care.</p>
+      <p class="footer__copy">© 2026 Mahesh Upreti — handcrafted, statically served.</p>
       <a href="#hero" class="footer__top" aria-label="Back to top">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true">
-          <polyline points="18 15 12 9 6 15"/>
+        <span>Back to top</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="14" height="14" aria-hidden="true">
+          <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
         </svg>
       </a>
     </div>

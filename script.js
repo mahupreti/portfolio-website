@@ -166,9 +166,9 @@ contactForm.addEventListener('submit', (e) => {
   btn.style.opacity = '0.7';
 
   setTimeout(() => {
-    btn.innerHTML = '<span>Message Sent! ✓</span>';
+    btn.innerHTML = '<span>Message sent ✓</span>';
     btn.style.opacity = '1';
-    btn.style.background = '#00d4aa';
+    btn.style.background = '#16A34A';
 
     setTimeout(() => {
       btn.innerHTML = originalHTML;
@@ -198,6 +198,38 @@ shakeStyle.textContent = `
   }
 `;
 document.head.appendChild(shakeStyle);
+
+// ============================================
+// Live local time (Asia/Kathmandu — UTC+05:45)
+// ============================================
+const localTimeEl = document.getElementById('localTime');
+
+const timeFormatter = (() => {
+  try {
+    return new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Kathmandu',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+  } catch (_) {
+    return null;
+  }
+})();
+
+function renderLocalTime() {
+  if (!localTimeEl) return;
+  if (!timeFormatter) { localTimeEl.textContent = 'UTC+05:45'; return; }
+  localTimeEl.textContent = `${timeFormatter.format(new Date())} UTC+05:45`;
+}
+
+// Align ticks to the next whole second, then tick every 1000ms.
+renderLocalTime();
+setTimeout(() => {
+  renderLocalTime();
+  setInterval(renderLocalTime, 1000);
+}, 1000 - (Date.now() % 1000));
 
 // ============================================
 // Smooth scroll for all anchor links
