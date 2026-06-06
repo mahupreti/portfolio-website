@@ -925,6 +925,10 @@ a.contact__info-value:hover { color: var(--accent); }
   background: linear-gradient(to right, var(--bg-elev), transparent 80%);
   padding-left: 8px;
 }
+.writing-card--simple {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
 .writing-card__date {
   font-family: var(--mono);
   font-size: 12.5px;

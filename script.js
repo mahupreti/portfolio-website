@@ -255,57 +255,6 @@ setTimeout(() => {
 }, 1000 - (Date.now() % 1000));
 
 // ============================================
-// Writing — render latest posts on homepage
-// ============================================
-const writingList = document.getElementById('writingList');
-
-if (writingList) {
-  fetch('posts/manifest.json', { cache: 'no-cache' })
-    .then(r => r.ok ? r.json() : Promise.reject(r.status))
-    .then(data => {
-      const posts = (data.posts || [])
-        .slice()
-        .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
-        .slice(0, 3);
-
-      if (!posts.length) {
-        writingList.innerHTML = '<p class="writing__empty">No posts yet — check back soon.</p>';
-        return;
-      }
-
-      writingList.innerHTML = posts.map(post => `
-        <a class="writing-card" href="blog.html#${encodeURIComponent(post.slug)}">
-          <span class="writing-card__date">${formatPostDate(post.date)}</span>
-          <span class="writing-card__body">
-            <span class="writing-card__title">${escapeHtml(post.title)}</span>
-            ${post.excerpt ? `<span class="writing-card__excerpt">${escapeHtml(post.excerpt)}</span>` : ''}
-          </span>
-          <span class="writing-card__arrow" aria-hidden="true">→</span>
-        </a>
-      `).join('');
-    })
-    .catch(() => {
-      writingList.innerHTML = '<p class="writing__empty">Couldn’t load posts right now.</p>';
-    });
-}
-
-function formatPostDate(iso) {
-  if (!iso) return '';
-  try {
-    return new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-      .format(new Date(iso + 'T00:00:00'));
-  } catch (_) {
-    return iso;
-  }
-}
-
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, ch => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  }[ch]));
-}
-
-// ============================================
 // Smooth scroll for all anchor links
 // ============================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
