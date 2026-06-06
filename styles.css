@@ -753,6 +753,23 @@ em {
   white-space: nowrap;
   line-height: 1.4;
 }
+.goodie-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.goodie-card__links a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1px;
+  transition: color 180ms var(--ease), border-color 180ms var(--ease);
+}
+.goodie-card__links a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
 .goodie-card__tags {
   display: flex;
   flex-wrap: wrap;
