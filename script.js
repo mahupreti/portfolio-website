@@ -168,7 +168,7 @@ contactForm.addEventListener('submit', (e) => {
   setTimeout(() => {
     btn.innerHTML = '<span>Message sent ✓</span>';
     btn.style.opacity = '1';
-    btn.style.background = '#16A34A';
+    btn.style.background = 'var(--ok)';
 
     setTimeout(() => {
       btn.innerHTML = originalHTML;
@@ -268,7 +268,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ============================================
-// Animations: hero char-split, card spotlight, scroll progress
+// Animations: hero char-split, scroll progress
 // ============================================
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -323,38 +323,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   heroName.classList.remove('animate-in'); // chars handle their own reveal now
 })();
 
-// 2. Card spotlight — track cursor on hover, set CSS custom properties.
-//    Event delegation so dynamically-added cards (writing list) get it too.
-if (!prefersReducedMotion) {
-  document.addEventListener('pointermove', (e) => {
-    const card = e.target.closest('.stack-card, .goodie-card, .writing-card');
-    if (!card) return;
-    const r = card.getBoundingClientRect();
-    card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-    card.style.setProperty('--my', `${e.clientY - r.top}px`);
-  }, { passive: true });
-}
-
-// 3. Magnetic hero buttons — translate toward cursor while hovered.
-if (!prefersReducedMotion) {
-  document.querySelectorAll('.hero__actions .btn').forEach(btn => {
-    btn.addEventListener('pointermove', (e) => {
-      const r = btn.getBoundingClientRect();
-      const cx = r.left + r.width / 2;
-      const cy = r.top + r.height / 2;
-      const dx = (e.clientX - cx) * 0.25;
-      const dy = (e.clientY - cy) * 0.25;
-      btn.style.setProperty('--btn-x', `${dx}px`);
-      btn.style.setProperty('--btn-y', `${dy}px`);
-    });
-    btn.addEventListener('pointerleave', () => {
-      btn.style.setProperty('--btn-x', '0px');
-      btn.style.setProperty('--btn-y', '0px');
-    });
-  });
-}
-
-// 4. Scroll progress bar.
+// 2. Scroll progress bar.
 const scrollProgress = document.getElementById('scrollProgress');
 if (scrollProgress && !prefersReducedMotion) {
   let ticking = false;
