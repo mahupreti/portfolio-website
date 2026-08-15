@@ -6,9 +6,9 @@
 
 /* ----- Tokens ----- */
 :root {
-  --bg:            #F6F7F9;
+  --bg:            #F4F6FA;
   --bg-elev:       #FFFFFF;
-  --surface:       #EEF1F6;
+  --surface:       #E9EDF5;
   --text:          #0B1220;
   --text-muted:    #56607A;
   --text-subtle:   #94A0B5;
@@ -16,9 +16,20 @@
   --border-strong: #CBD2DE;
   --accent:        #2563EB;
   --accent-hover:  #1D4ED8;
-  --accent-soft:   #DBEAFE;
+  --accent-soft:   #DDE9FE;
+  --accent-2:      #7C3AED;
+  --accent-3:      #0891B2;
   --on-accent:     #FFFFFF;
   --ok:            #16A34A;
+
+  /* Signature gradient — used for rules, rings, badges, and glows */
+  --grad: linear-gradient(115deg, var(--accent) 0%, var(--accent-2) 54%, var(--accent-3) 100%);
+
+  --shadow-sm: 0 1px 2px rgba(11, 18, 32, 0.04), 0 3px 10px -6px rgba(11, 18, 32, 0.10);
+  --shadow-md: 0 2px 4px rgba(11, 18, 32, 0.04), 0 14px 34px -18px rgba(11, 18, 32, 0.22);
+  --shadow-lg: 0 4px 10px rgba(11, 18, 32, 0.05), 0 30px 70px -30px rgba(11, 18, 32, 0.30);
+  --ring:      0 0 0 4px color-mix(in oklab, var(--accent) 16%, transparent);
+  --glow:      0 14px 40px -18px color-mix(in oklab, var(--accent) 70%, transparent);
 
   --maxw: 1180px;
   --gutter: clamp(20px, 4vw, 48px);
@@ -27,35 +38,50 @@
   --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  --radius-sm: 6px;
-  --radius:    10px;
-  --radius-lg: 16px;
+  --radius-sm: 8px;
+  --radius:    12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 [data-theme="dark"] {
-  --bg:            #0B0F1A;
-  --bg-elev:       #11172A;
-  --surface:       #1A2238;
+  --bg:            #080B14;
+  --bg-elev:       #0F1524;
+  --surface:       #182034;
   --text:          #E7EBF3;
-  --text-muted:    #94A3B8;
+  --text-muted:    #98A3B8;
   --text-subtle:   #5D6A82;
-  --border:        #1F2A44;
-  --border-strong: #2D3A5A;
+  --border:        #1D273F;
+  --border-strong: #2E3B5C;
   --accent:        #60A5FA;
   --accent-hover:  #93C5FD;
-  --accent-soft:   #172554;
-  --on-accent:     #0B0F1A;
+  --accent-soft:   #14224A;
+  --accent-2:      #A78BFA;
+  --accent-3:      #22D3EE;
+  --on-accent:     #061024;
   --ok:            #22C55E;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40), 0 3px 12px -6px rgba(0, 0, 0, 0.60);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.45), 0 16px 40px -20px rgba(0, 0, 0, 0.80);
+  --shadow-lg: 0 6px 14px rgba(0, 0, 0, 0.50), 0 34px 80px -34px rgba(0, 0, 0, 0.90);
+  --ring:      0 0 0 4px color-mix(in oklab, var(--accent) 22%, transparent);
+  --glow:      0 14px 46px -18px color-mix(in oklab, var(--accent) 60%, transparent);
 }
 
 /* ----- Reset ----- */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  /* .reveal--right parks elements 32px to the right until they animate in,
+     which would otherwise widen the document. `clip` (not `hidden`) keeps
+     .about__side's position: sticky working. */
+  overflow-x: clip;
+}
 body {
   margin: 0;
-  background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
   font-size: 17px;
@@ -63,8 +89,29 @@ body {
   font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background 240ms var(--ease), color 240ms var(--ease);
+  transition: background-color 240ms var(--ease), color 240ms var(--ease);
+
+  /* Ambient colour wash — fixed, so it stays put while the page scrolls. */
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(880px 620px at 100% -5%, color-mix(in oklab, var(--accent) 9%, transparent), transparent 62%),
+    radial-gradient(760px 620px at -8% 34%, color-mix(in oklab, var(--accent-2) 7%, transparent), transparent 62%),
+    radial-gradient(700px 560px at 60% 108%, color-mix(in oklab, var(--accent-3) 7%, transparent), transparent 62%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
+
+/* Fine film grain over everything — adds tooth so the flat areas aren't dead. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+[data-theme="dark"] body::before { opacity: 0.045; }
 
 img, svg { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
@@ -75,6 +122,12 @@ ul, ol { list-style: none; }
 ::selection {
   background: var(--accent);
   color: var(--on-accent);
+}
+
+:where(a, button, input, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
 }
 
 /* ----- Layout ----- */
@@ -90,13 +143,24 @@ ul, ol { list-style: none; }
   position: relative;
 }
 
-.section + .section { border-top: 1px solid var(--border); }
+/* Feathered hairline between sections instead of a hard edge-to-edge rule. */
+.section + .section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border) 14%, var(--border-strong) 50%, var(--border) 86%, transparent);
+  pointer-events: none;
+}
 
 /* ----- Type ----- */
 .serif-italic {
   font-family: var(--serif);
   font-style: italic;
   color: var(--accent);
+  -webkit-text-fill-color: var(--accent);
   font-weight: 400;
 }
 
@@ -105,12 +169,30 @@ ul, ol { list-style: none; }
   margin-bottom: clamp(40px, 6vw, 72px);
 }
 .section__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   font-family: var(--mono);
-  font-size: 12.5px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--text-muted);
-  margin: 0 0 18px;
+  margin: 0 0 20px;
   text-transform: lowercase;
+  padding: 5px 13px 5px 11px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--bg-elev) 70%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-sm);
+}
+.section__label::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--grad);
+  flex: none;
 }
 .section__title {
   font-family: var(--serif);
@@ -125,6 +207,17 @@ ul, ol { list-style: none; }
   color: var(--text-muted);
   font-size: 17px;
   max-width: 56ch;
+}
+/* Short gradient rule under every section heading block. */
+.section__head::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin-top: 26px;
+  border-radius: 999px;
+  background: var(--grad);
+  opacity: 0.9;
 }
 
 .lede {
@@ -147,13 +240,28 @@ em {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  background: color-mix(in oklab, var(--bg) 82%, transparent);
-  backdrop-filter: saturate(160%) blur(14px);
-  -webkit-backdrop-filter: saturate(160%) blur(14px);
-  border-bottom: 1px solid transparent;
-  transition: border-color 200ms var(--ease), background 200ms var(--ease);
+  background: color-mix(in oklab, var(--bg) 68%, transparent);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  transition: background 200ms var(--ease), box-shadow 240ms var(--ease);
 }
-.nav--scrolled { border-bottom-color: var(--border); }
+/* Gradient hairline that fades in once the page starts scrolling. */
+.nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-strong) 20%, var(--border-strong) 80%, transparent);
+  opacity: 0;
+  transition: opacity 240ms var(--ease);
+}
+.nav--scrolled {
+  background: color-mix(in oklab, var(--bg) 84%, transparent);
+  box-shadow: 0 10px 30px -24px rgba(0, 0, 0, 0.6);
+}
+.nav--scrolled::after { opacity: 1; }
 
 .nav__inner {
   display: flex;
@@ -174,7 +282,13 @@ em {
   transition: opacity 180ms var(--ease);
 }
 .nav__logo:hover { opacity: 0.7; }
-.nav__logo-mark { color: var(--accent); }
+.nav__logo-mark {
+  background: var(--grad);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
 
 .nav__links {
   display: flex;
@@ -190,7 +304,7 @@ em {
   color: var(--text-muted);
   transition: color 160ms var(--ease), background 160ms var(--ease);
 }
-.nav__links a:hover { color: var(--text); }
+.nav__links a:hover { color: var(--text); background: color-mix(in oklab, var(--surface) 60%, transparent); }
 .nav__links a.active {
   color: var(--text);
   background: var(--surface);
@@ -211,10 +325,18 @@ em {
   border-radius: 999px;
   color: var(--text);
   border: 1px solid var(--border);
-  transition: background 160ms var(--ease), border-color 160ms var(--ease), transform 220ms var(--ease);
+  background: var(--bg-elev);
+  box-shadow: var(--shadow-sm);
+  transition: background 160ms var(--ease), border-color 160ms var(--ease), transform 220ms var(--ease), box-shadow 220ms var(--ease);
   position: relative;
 }
-.theme-toggle:hover { background: var(--surface); border-color: var(--border-strong); }
+.theme-toggle:hover {
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.theme-toggle:active { transform: translateY(0) scale(0.94); }
 .theme-toggle__icon { position: absolute; transition: opacity 240ms var(--ease), transform 320ms var(--ease); }
 [data-theme="dark"] .theme-toggle__icon--sun { opacity: 1; transform: rotate(0); }
 [data-theme="dark"] .theme-toggle__icon--moon { opacity: 0; transform: rotate(-30deg); }
@@ -252,13 +374,40 @@ em {
   overflow: hidden;
 }
 
+/* Aurora — three slow-drifting colour fields behind the hero. */
 .hero::before {
+  content: "";
+  position: absolute;
+  inset: -25% -15%;
+  background-image:
+    radial-gradient(42% 46% at 80% 12%, color-mix(in oklab, var(--accent) 30%, transparent), transparent 68%),
+    radial-gradient(38% 44% at 14% 82%, color-mix(in oklab, var(--accent-2) 26%, transparent), transparent 68%),
+    radial-gradient(34% 40% at 52% 46%, color-mix(in oklab, var(--accent-3) 18%, transparent), transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 0;
+  animation: auroraDrift 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+[data-theme="dark"] .hero::before { filter: blur(34px) saturate(120%); }
+
+@keyframes auroraDrift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(-3%, 2%, 0) scale(1.06); }
+  100% { transform: translate3d(3%, -2%, 0) scale(1.02); }
+}
+
+/* Faint engineering grid, masked to a soft vignette. */
+.hero::after {
   content: "";
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(1200px 600px at 85% -10%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 60%),
-    radial-gradient(900px 500px at -10% 110%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 55%);
+    linear-gradient(to right,  color-mix(in oklab, var(--text) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--text) 7%, transparent) 1px, transparent 1px);
+  background-size: 68px 68px;
+  -webkit-mask-image: radial-gradient(72% 62% at 50% 34%, #000 0%, transparent 78%);
+          mask-image: radial-gradient(72% 62% at 50% 34%, #000 0%, transparent 78%);
   pointer-events: none;
   z-index: 0;
 }
@@ -266,14 +415,18 @@ em {
 .hero__inner { position: relative; z-index: 1; }
 
 .hero__status {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
-  padding: 7px 14px;
+  padding: 8px 16px;
   border-radius: 999px;
-  background: var(--bg-elev);
+  background: color-mix(in oklab, var(--bg-elev) 78%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
   font-family: var(--mono);
   font-size: 12.5px;
   color: var(--text-muted);
@@ -312,6 +465,7 @@ em {
   line-height: 0.95;
   letter-spacing: -0.025em;
   margin: 0;
+  color: var(--text);
 }
 
 .hero__lede {
@@ -336,61 +490,122 @@ em {
   margin-top: clamp(48px, 7vw, 80px);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  padding-top: 28px;
-  border-top: 1px solid var(--border);
+  gap: 14px;
 }
-.hero__meta div { display: flex; flex-direction: column; gap: 6px; }
+.hero__meta div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: color-mix(in oklab, var(--bg-elev) 66%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: border-color 220ms var(--ease), transform 260ms var(--ease), box-shadow 260ms var(--ease);
+}
+/* Gradient cap on the top edge of each card. */
+.hero__meta div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 22px;
+  right: 22px;
+  height: 2px;
+  border-radius: 0 0 999px 999px;
+  background: var(--grad);
+  opacity: 0.55;
+  transition: opacity 220ms var(--ease), left 260ms var(--ease), right 260ms var(--ease);
+}
+.hero__meta div:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.hero__meta div:hover::before { opacity: 1; left: 0; right: 0; }
 .hero__meta dt {
   font-family: var(--mono);
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--text-subtle);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .hero__meta dd {
   font-size: 15px;
   color: var(--text);
   margin: 0;
+  line-height: 1.45;
 }
 
 /* ============================================================
    Buttons
    ============================================================ */
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 22px;
+  padding: 13px 24px;
   border-radius: 999px;
   font-size: 14.5px;
   font-weight: 500;
   letter-spacing: -0.005em;
   border: 1px solid transparent;
-  transition: transform 200ms var(--ease), background 180ms var(--ease), color 180ms var(--ease), border-color 180ms var(--ease);
+  transition: transform 200ms var(--ease), background 180ms var(--ease), color 180ms var(--ease),
+              border-color 180ms var(--ease), box-shadow 240ms var(--ease);
   cursor: pointer;
   white-space: nowrap;
+  overflow: hidden;
+  isolation: isolate;
 }
 .btn--primary {
-  background: var(--accent);
-  color: var(--on-accent);
+  background: var(--grad);
+  background-size: 160% 160%;
+  background-position: 0% 50%;
+  color: #FFFFFF;
+  box-shadow: var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition: transform 200ms var(--ease), background-position 520ms var(--ease), box-shadow 240ms var(--ease);
 }
 .btn--primary:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
+  background-position: 100% 50%;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 46px -18px color-mix(in oklab, var(--accent) 85%, transparent),
+              inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
+.btn--primary:active { transform: translateY(0); }
+
+/* Sheen that sweeps across the primary button on hover. */
+.btn--primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 720ms var(--ease);
+  z-index: -1;
+}
+.btn--primary:hover::after { transform: translateX(120%); }
+
 .btn--ghost {
   border-color: var(--border-strong);
   color: var(--text);
+  background: color-mix(in oklab, var(--bg-elev) 60%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .btn--ghost:hover {
-  background: var(--surface);
-  border-color: var(--text);
+  background: var(--bg-elev);
+  border-color: color-mix(in oklab, var(--accent) 60%, var(--border-strong));
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 .btn--full { width: 100%; }
 .btn svg { transition: transform 220ms var(--ease); }
-.btn:hover svg { transform: translateX(2px); }
+.btn:hover svg { transform: translateX(3px); }
 
 /* ============================================================
    About
@@ -416,24 +631,63 @@ em {
   top: 100px;
 }
 .about__portrait {
+  position: relative;
   margin: 0;
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--surface);
   aspect-ratio: 4 / 5;
+  box-shadow: var(--shadow-md);
+  transition: transform 400ms var(--ease), box-shadow 400ms var(--ease);
 }
-.about__portrait img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.95); }
+.about__portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, color-mix(in oklab, var(--accent) 22%, transparent) 100%);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+.about__portrait:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.about__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.95);
+  transition: transform 600ms var(--ease), filter 400ms var(--ease);
+}
+.about__portrait:hover img { transform: scale(1.03); filter: saturate(1.05); }
 
 .about__stats {
+  position: relative;
   display: grid;
   gap: 18px;
-  padding: 22px;
-  background: var(--bg-elev);
+  padding: 24px;
+  background: color-mix(in oklab, var(--bg-elev) 72%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
-.about__stats div { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.about__stats::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--grad);
+}
+.about__stats div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--border);
+}
+.about__stats div:last-child { padding-bottom: 0; border-bottom: 0; }
 .about__stats dt {
   font-family: var(--mono);
   font-size: 12px;
@@ -443,12 +697,24 @@ em {
 }
 .about__stats dd {
   font-family: var(--serif);
-  font-size: 28px;
+  font-size: 30px;
   margin: 0;
   line-height: 1;
   color: var(--text);
+  background: var(--grad);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.stat__plus { color: var(--accent); margin-left: 1px; }
+.stat__plus { margin-left: 1px; }
+/* Non-numeric stat values read better as small mono, not display serif. */
+.about__stats dd.stat__text {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.4;
+  text-align: right;
+  letter-spacing: 0.01em;
+}
 
 /* ============================================================
    Stack
@@ -456,30 +722,71 @@ em {
 .stack__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  border-top: 1px solid var(--border);
-  border-left: 1px solid var(--border);
+  gap: 16px;
 }
 .stack-card {
-  padding: 28px 26px;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
-  transition: background 220ms var(--ease);
   position: relative;
+  padding: 26px 24px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: color-mix(in oklab, var(--bg-elev) 70%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease), border-color 220ms var(--ease);
 }
-.stack-card:hover { background: var(--bg-elev); }
+.stack-card:hover {
+  transform: translateY(-4px);
+  border-color: transparent;
+  box-shadow: var(--shadow-lg);
+}
+/* Gradient border ring, revealed on hover. */
+.stack-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--grad);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 260ms var(--ease);
+  pointer-events: none;
+}
+.stack-card:hover::after { opacity: 1; }
+
 .stack-card__head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
   margin-bottom: 18px;
 }
+.stack-card__icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 22%, transparent);
+  transition: transform 320ms var(--ease), color 220ms var(--ease), background 220ms var(--ease);
+}
+.stack-card:hover .stack-card__icon {
+  transform: translateY(-2px) rotate(-4deg) scale(1.06);
+  background: color-mix(in oklab, var(--accent) 18%, transparent);
+}
 .stack-card__num {
   font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent);
-  letter-spacing: 0.05em;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--text-subtle);
+  margin-left: auto;
+  align-self: flex-start;
 }
 .stack-card__head h3 {
   font-family: var(--serif);
@@ -497,14 +804,18 @@ em {
 .stack-card__tags li {
   font-family: var(--mono);
   font-size: 12px;
-  padding: 4px 9px;
+  padding: 4px 10px;
   color: var(--text-muted);
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: var(--bg-elev);
-  transition: color 180ms var(--ease), border-color 180ms var(--ease);
+  background: color-mix(in oklab, var(--bg) 55%, transparent);
+  transition: color 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease);
 }
-.stack-card:hover .stack-card__tags li { color: var(--text); border-color: var(--border-strong); }
+.stack-card:hover .stack-card__tags li {
+  color: var(--text);
+  border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+}
 
 /* ============================================================
    Experience (timeline)
@@ -529,19 +840,40 @@ em {
   left: 5px;
   top: 16px;
   bottom: -56px;
-  width: 1px;
-  background: var(--border);
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(to bottom,
+    var(--accent),
+    color-mix(in oklab, var(--accent-2) 70%, transparent) 55%,
+    color-mix(in oklab, var(--accent-3) 10%, transparent));
 }
 .timeline__item:last-child .timeline__rail::before { display: none; }
 .timeline__node {
   display: block;
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: var(--bg);
-  border: 2px solid var(--accent);
+  background: var(--grad);
+  border: 2px solid var(--bg);
   position: relative;
   z-index: 1;
+  box-shadow:
+    0 0 0 3px color-mix(in oklab, var(--accent) 18%, transparent),
+    0 0 18px -2px color-mix(in oklab, var(--accent) 80%, transparent);
+}
+/* Radar ping on the most recent role. */
+.timeline__item:first-child .timeline__node::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  animation: nodePing 2.6s var(--ease) infinite;
+}
+@keyframes nodePing {
+  0%   { transform: scale(0.7); opacity: 0.85; }
+  70%  { transform: scale(2.1); opacity: 0; }
+  100% { transform: scale(2.1); opacity: 0; }
 }
 
 .timeline__body {
@@ -583,10 +915,16 @@ em {
 .timeline__tags li {
   font-family: var(--mono);
   font-size: 11.5px;
-  padding: 3px 9px;
+  padding: 4px 10px;
   color: var(--text-muted);
   border: 1px solid var(--border);
   border-radius: 999px;
+  background: color-mix(in oklab, var(--bg-elev) 55%, transparent);
+  transition: color 180ms var(--ease), border-color 180ms var(--ease);
+}
+.timeline__item:hover .timeline__tags li {
+  color: var(--text);
+  border-color: color-mix(in oklab, var(--accent) 32%, var(--border));
 }
 
 /* ============================================================
@@ -594,25 +932,52 @@ em {
    ============================================================ */
 .work__list { display: flex; flex-direction: column; }
 .work-item {
+  position: relative;
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: 32px;
-  padding: 40px 0;
+  padding: 40px 24px 40px 28px;
   border-top: 1px solid var(--border);
-  transition: background 220ms var(--ease);
+  transition: background 260ms var(--ease), transform 260ms var(--ease);
 }
 .work-item:last-child { border-bottom: 1px solid var(--border); }
-.work-item:hover { background: linear-gradient(to right, var(--bg-elev), transparent 80%); }
+.work-item:hover {
+  background: linear-gradient(to right, color-mix(in oklab, var(--bg-elev) 85%, transparent), transparent 78%);
+  transform: translateX(4px);
+}
+/* Gradient spine that grows in on hover. */
+.work-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 24px;
+  bottom: 24px;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--grad);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 380ms var(--ease);
+}
+.work-item:hover::before { transform: scaleY(1); }
 
 .work-item__meta {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   font-family: var(--mono);
   font-size: 12.5px;
   color: var(--text-muted);
 }
-.work-item__index { color: var(--accent); }
+.work-item__index {
+  font-family: var(--serif);
+  font-size: 40px;
+  line-height: 1;
+  background: var(--grad);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .work-item__title {
   font-family: var(--serif);
@@ -636,10 +1001,11 @@ em {
 .work-item__tags li {
   font-family: var(--mono);
   font-size: 11.5px;
-  padding: 3px 9px;
+  padding: 4px 10px;
   color: var(--text-muted);
   border: 1px solid var(--border);
   border-radius: 999px;
+  background: color-mix(in oklab, var(--bg-elev) 55%, transparent);
 }
 .work-item__link {
   display: inline-flex;
@@ -648,11 +1014,20 @@ em {
   font-size: 14px;
   font-weight: 500;
   color: var(--text);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 4px;
-  transition: color 180ms var(--ease), border-color 180ms var(--ease);
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--bg-elev) 70%, transparent);
+  transition: color 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease),
+              transform 200ms var(--ease), box-shadow 240ms var(--ease);
 }
-.work-item__link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.work-item__link:hover {
+  color: var(--accent);
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+  background: var(--bg-elev);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
 .work-item__link-arrow {
   transition: transform 200ms var(--ease);
   font-family: var(--mono);
@@ -660,29 +1035,53 @@ em {
 .work-item__link:hover .work-item__link-arrow { transform: translate(2px, -2px); }
 
 /* ============================================================
-   Goodies (open-source tools)
+   Product cards (web apps, extensions, CLIs, agents)
    ============================================================ */
 .goodies__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
+/* Stagger the reveal across each row so a full grid doesn't pop in at once. */
+.goodies__grid > .goodie-card:nth-child(3n + 2) { --delay: 0.07s; }
+.goodies__grid > .goodie-card:nth-child(3n)     { --delay: 0.14s; }
 .goodie-card:only-child { max-width: 460px; }
 .goodie-card {
   display: flex;
   flex-direction: column;
   gap: 14px;
   padding: 24px;
-  background: var(--bg-elev);
+  background: color-mix(in oklab, var(--bg-elev) 76%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 200ms var(--ease), transform 260ms var(--ease), box-shadow 260ms var(--ease);
 }
 .goodie-card:hover {
-  border-color: var(--border-strong);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px -16px color-mix(in oklab, var(--text) 30%, transparent);
+  border-color: transparent;
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
+/* Gradient border ring, revealed on hover. */
+.goodie-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--grad);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 260ms var(--ease);
+  pointer-events: none;
+}
+.goodie-card:hover::after { opacity: 1; }
+
 .goodie-card__head {
   display: flex;
   align-items: center;
@@ -694,9 +1093,10 @@ em {
   font-size: 10.5px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 4px 9px;
+  padding: 5px 11px;
   border-radius: 999px;
-  background: var(--accent-soft);
+  background: color-mix(in oklab, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 26%, transparent);
   color: var(--accent);
   white-space: nowrap;
 }
@@ -704,17 +1104,19 @@ em {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 999px;
   color: var(--text-muted);
   border: 1px solid var(--border);
-  transition: color 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease);
+  background: color-mix(in oklab, var(--bg) 50%, transparent);
+  transition: color 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease), transform 220ms var(--ease);
 }
 .goodie-card__link:hover {
   color: var(--accent);
   border-color: var(--accent);
   background: var(--accent-soft);
+  transform: rotate(8deg) scale(1.08);
 }
 .goodie-card__title {
   font-family: var(--mono);
@@ -745,14 +1147,17 @@ em {
   font-family: var(--mono);
   font-size: 12px;
   color: var(--text);
-  padding: 10px 12px;
-  background: var(--bg);
+  padding: 11px 13px;
+  background: color-mix(in oklab, var(--bg) 70%, transparent);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-left: 2px solid color-mix(in oklab, var(--accent) 60%, transparent);
+  border-radius: var(--radius-sm);
   overflow-x: auto;
   white-space: nowrap;
   line-height: 1.4;
+  transition: border-color 200ms var(--ease), color 200ms var(--ease);
 }
+a.goodie-card__install:hover { color: var(--accent); border-color: color-mix(in oklab, var(--accent) 45%, var(--border)); }
 .goodie-card__links {
   display: flex;
   flex-wrap: wrap;
@@ -794,6 +1199,9 @@ em {
 }
 .credentials__block:first-of-type { padding-top: 0; border-top: 0; }
 .credentials__heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -801,16 +1209,44 @@ em {
   text-transform: uppercase;
   margin: 0 0 24px;
 }
+.credentials__heading::after {
+  content: "";
+  width: 40px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--grad);
+  opacity: 0.7;
+}
 .cert-list { display: flex; flex-direction: column; }
 .cert-item {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 24px;
   align-items: baseline;
-  padding: 18px 0;
+  padding: 18px 16px 18px 20px;
+  margin-left: -20px;
   border-top: 1px solid var(--border);
+  transition: background 240ms var(--ease);
 }
-.cert-item:first-child { border-top: 0; padding-top: 0; }
+.cert-item:first-child { border-top: 0; }
+.cert-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 22px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--grad);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 240ms var(--ease), transform 240ms var(--ease);
+}
+.cert-item:hover {
+  background: linear-gradient(to right, color-mix(in oklab, var(--bg-elev) 85%, transparent), transparent 85%);
+}
+.cert-item:hover::before { opacity: 1; transform: scale(1); }
 .cert-item__main h4 {
   font-family: var(--serif);
   font-size: 21px;
@@ -818,7 +1254,9 @@ em {
   margin: 0 0 4px;
   line-height: 1.25;
   letter-spacing: -0.005em;
+  transition: color 200ms var(--ease);
 }
+.cert-item:hover .cert-item__main h4 { color: var(--accent); }
 .cert-item__main p {
   margin: 0;
   color: var(--text-muted);
@@ -859,32 +1297,49 @@ em {
 }
 .form__input {
   width: 100%;
-  padding: 14px 16px;
+  padding: 15px 17px;
   font: inherit;
   font-size: 15.5px;
   color: var(--text);
-  background: var(--bg-elev);
+  background: color-mix(in oklab, var(--bg-elev) 76%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: border-color 160ms var(--ease), background 160ms var(--ease), box-shadow 200ms var(--ease);
 }
 .form__input::placeholder { color: var(--text-subtle); }
+.form__input:hover { border-color: var(--border-strong); }
 .form__input:focus {
   outline: 0;
   border-color: var(--accent);
-  background: var(--bg);
-  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent);
+  background: var(--bg-elev);
+  box-shadow: var(--ring);
 }
 .form__textarea { resize: vertical; min-height: 140px; line-height: 1.55; }
 
 .contact__info {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 28px;
-  padding: 28px;
-  background: var(--bg-elev);
+  padding: 30px;
+  background: color-mix(in oklab, var(--bg-elev) 76%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.contact__info::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--grad);
 }
 .contact__info-block { display: flex; flex-direction: column; gap: 6px; }
 .contact__info-label {
@@ -933,19 +1388,20 @@ a.contact__info-value:hover { color: var(--accent); }
   grid-template-columns: 160px 1fr auto;
   gap: 28px;
   align-items: baseline;
-  padding: 26px 0;
+  padding: 26px 16px;
+  margin: 0 -16px;
   border-bottom: 1px solid var(--border);
   color: var(--text);
-  transition: background 220ms var(--ease), padding 220ms var(--ease);
+  transition: background 240ms var(--ease), transform 240ms var(--ease);
 }
 .writing-card:hover {
-  background: linear-gradient(to right, var(--bg-elev), transparent 80%);
-  padding-left: 8px;
+  background: linear-gradient(to right, color-mix(in oklab, var(--bg-elev) 88%, transparent), transparent 82%);
+  transform: translateX(6px);
 }
 .writing-card--simple {
   grid-template-columns: 1fr auto;
   align-items: center;
-  padding: 18px 0;
+  padding: 18px 16px;
 }
 .writing-card--simple .writing-card__title {
   font-family: var(--sans);
@@ -992,11 +1448,18 @@ a.contact__info-value:hover { color: var(--accent); }
   font-family: var(--mono);
   font-size: 13px;
   color: var(--text);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 4px;
-  transition: color 180ms var(--ease), border-color 180ms var(--ease);
+  padding: 11px 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--bg-elev) 70%, transparent);
+  transition: color 180ms var(--ease), border-color 180ms var(--ease), transform 200ms var(--ease), box-shadow 240ms var(--ease);
 }
-.writing__all:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.writing__all:hover {
+  color: var(--accent);
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
 
 /* ============================================================
    Blog page (blog.html)
@@ -1236,9 +1699,21 @@ a.contact__info-value:hover { color: var(--accent); }
    Footer
    ============================================================ */
 .footer {
-  padding: 32px 0 40px;
+  position: relative;
+  padding: 40px 0 48px;
   border-top: 1px solid var(--border);
-  background: var(--bg);
+}
+.footer::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(320px, 60%);
+  height: 2px;
+  border-radius: 999px;
+  background: var(--grad);
+  opacity: 0.8;
 }
 .footer__inner {
   display: flex;
@@ -1265,7 +1740,14 @@ a.contact__info-value:hover { color: var(--accent); }
   border-radius: 999px;
   transition: color 160ms var(--ease), border-color 160ms var(--ease), transform 200ms var(--ease);
 }
-.footer__top:hover { color: var(--text); border-color: var(--text); transform: translateY(-1px); }
+.footer__top:hover {
+  color: var(--accent);
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.footer__top svg { transition: transform 220ms var(--ease); }
+.footer__top:hover svg { transform: translateY(-2px); }
 
 /* ============================================================
    Reveal animations
@@ -1332,9 +1814,20 @@ a.contact__info-value:hover { color: var(--accent); }
   animation: charRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   animation-delay: calc(var(--i) * 0.035s + 0.18s);
   will-change: transform, opacity;
+  /* Vertical ink fade — weight at the top, air at the baseline. Applied per
+     character rather than on the h1: the spans animate opacity, which isolates
+     them from an ancestor's background-clip:text and would render it invisible. */
+  background: linear-gradient(178deg,
+    var(--text) 45%,
+    color-mix(in oklab, var(--text) 74%, var(--bg)) 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .hero-char--accent {
   color: var(--accent);
+  background: none;
+  -webkit-text-fill-color: var(--accent);
   font-family: var(--serif);
   font-style: italic;
 }
@@ -1417,9 +1910,10 @@ a.contact__info-value:hover { color: var(--accent); }
   position: fixed;
   top: 0;
   left: 0;
-  height: 2px;
+  height: 3px;
   width: 0;
-  background: linear-gradient(to right, var(--accent), color-mix(in oklab, var(--accent) 60%, var(--text-subtle)));
+  background: var(--grad);
+  box-shadow: 0 0 12px -1px color-mix(in oklab, var(--accent) 80%, transparent);
   z-index: 100;
   pointer-events: none;
   opacity: 0;
@@ -1576,10 +2070,12 @@ a.contact__info-value:hover { color: var(--accent); }
 .marquee {
   position: relative;
   overflow: hidden;
-  padding: 22px 0;
+  padding: 24px 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  background: var(--bg);
+  background: color-mix(in oklab, var(--bg-elev) 45%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
@@ -1629,6 +2125,10 @@ a.contact__info-value:hover { color: var(--accent); }
   .section__label::after { animation: none; }
   #localTime [data-seg].time-flip { animation: none; }
   .hero__actions .btn { transform: none; transition: none; }
+  .hero::before { animation: none; }
+  .timeline__item:first-child .timeline__node::after { animation: none; opacity: 0; }
+  .btn--primary::after { display: none; }
+  .work-item::before { transform: scaleY(1); transition: none; }
   html { scroll-behavior: auto; }
 }
 
@@ -1684,7 +2184,13 @@ a.contact__info-value:hover { color: var(--accent); }
 
   .timeline__item, .work-item { grid-template-columns: 1fr; gap: 12px; }
   .timeline__rail { display: none; }
-  .work-item__meta { flex-direction: row; gap: 12px; }
+  .work-item { padding-left: 20px; padding-right: 0; }
+  .work-item__meta { flex-direction: row; align-items: baseline; gap: 14px; }
+  .work-item__index { font-size: 30px; }
+
+  .section__head::after { margin-top: 22px; }
+  .hero__meta div { padding: 16px 18px; }
+  .cert-item { padding-left: 18px; margin-left: -18px; }
 
   .writing-card { grid-template-columns: 1fr auto; gap: 12px; }
   .writing-card__date { order: -1; grid-column: 1 / -1; }

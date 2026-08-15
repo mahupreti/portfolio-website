@@ -280,11 +280,23 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
   let charIndex = 0;
   const replacements = [];
+  const nodes = Array.from(heroName.childNodes);
 
-  Array.from(heroName.childNodes).forEach(node => {
+  nodes.forEach((node, nodeIndex) => {
     if (node.nodeType === Node.TEXT_NODE) {
+      // The markup's indentation lives in this text node. Collapse whitespace
+      // runs the way normal layout would and drop it at the edges — otherwise
+      // every source space becomes an inline-block char and indents the name.
+      let text = node.textContent.replace(/\s+/g, ' ');
+      if (nodeIndex === 0) text = text.replace(/^ /, '');
+      if (nodeIndex === nodes.length - 1) text = text.replace(/ $/, '');
+      if (!text) {
+        replacements.push({ original: node, replacement: document.createDocumentFragment() });
+        return;
+      }
+
       const frag = document.createDocumentFragment();
-      for (const ch of node.textContent) {
+      for (const ch of text) {
         const span = document.createElement('span');
         span.className = 'hero-char';
         span.style.setProperty('--i', charIndex++);
