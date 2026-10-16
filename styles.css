@@ -1,29 +1,26 @@
 /* ============================================================
-   Mahesh Upreti — Portfolio
-   Design: warm editorial (Claude-inspired) with cloud-engineer
-   accents. Light + dark parity.
+  Mahesh Upreti — Portfolio
+  Design: technical field notes with a clear light/dark palette.
    ============================================================ */
 
-/* ----- Tokens -----
-   Warm editorial: paper and ink, one vermilion accent used sparingly.
-   No gradients, no glass, no glow — structure comes from type and rules. */
+/* ----- Tokens ----- */
 :root {
-  --bg:            #F7F4EF;  /* warm paper */
-  --bg-elev:       #FFFDF9;  /* a shade lifted off the paper */
-  --surface:       #EFEAE1;
-  --text:          #1A1714;
-  --text-muted:    #6B6259;
-  --text-subtle:   #9C9288;
-  --border:        #E0D9CE;
-  --border-strong: #C6BCAD;
-  --accent:        #C2410C;  /* vermilion */
-  --accent-hover:  #9A3412;
-  --accent-soft:   #F6E7DE;
-  --on-accent:     #FFFDF9;
-  --ok:            #4D7C0F;
+  --bg:            #F1F6F7;
+  --bg-elev:       #FBFDFD;
+  --surface:       #E4ECEF;
+  --text:          #14232B;
+  --text-muted:    #526771;
+  --text-subtle:   #788B94;
+  --border:        #D2DFE3;
+  --border-strong: #AFC1C8;
+  --accent:        #245FD1;
+  --accent-hover:  #1948AA;
+  --accent-soft:   #DFE9FC;
+  --on-accent:     #FFFFFF;
+  --ok:            #2D805F;
+  --gold:          #C38B32;
 
-  /* Editorial print has no drop shadows. Tokens stay defined so any stray
-     box-shadow resolves to nothing rather than to a stale blue glow. */
+  /* Keep shadows restrained; structure comes from type, grid, and rules. */
   --shadow-sm: none;
   --shadow-md: none;
   --shadow-lg: none;
@@ -33,7 +30,7 @@
   --maxw: 1180px;
   --gutter: clamp(20px, 4vw, 48px);
 
-  --serif: "Instrument Serif", "Iowan Old Style", "Apple Garamond", Georgia, serif;
+  --serif: "Space Grotesk", "Inter", sans-serif;
   --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
@@ -46,19 +43,20 @@
 }
 
 [data-theme="dark"] {
-  --bg:            #14120F;  /* warm ink */
-  --bg-elev:       #1C1917;
-  --surface:       #262220;
-  --text:          #EDE8E0;
-  --text-muted:    #A39A8E;
-  --text-subtle:   #6E655B;
-  --border:        #2A2521;
-  --border-strong: #443C35;
-  --accent:        #E86A43;
-  --accent-hover:  #F28A65;
-  --accent-soft:   #2A1710;
-  --on-accent:     #14120F;
-  --ok:            #84CC16;
+  --bg:            #11191E;
+  --bg-elev:       #18252B;
+  --surface:       #22333A;
+  --text:          #EEF5F6;
+  --text-muted:    #B1C1C6;
+  --text-subtle:   #81969D;
+  --border:        #30444B;
+  --border-strong: #486169;
+  --accent:        #82B5FF;
+  --accent-hover:  #A7CCFF;
+  --accent-soft:   #20354C;
+  --on-accent:     #11191E;
+  --ok:            #8BD2A9;
+  --gold:          #F0C779;
 }
 
 /* ----- Reset ----- */
@@ -133,8 +131,8 @@ ul, ol { list-style: none; }
 .serif-italic {
   font-family: var(--serif);
   font-style: italic;
-  color: var(--accent);
-  -webkit-text-fill-color: var(--accent);
+  color: var(--gold);
+  -webkit-text-fill-color: var(--gold);
   font-weight: 400;
 }
 
@@ -158,7 +156,7 @@ ul, ol { list-style: none; }
   content: "";
   width: 6px;
   height: 6px;
-  background: var(--accent);
+  background: var(--gold);
   flex: none;
 }
 .section__title {
@@ -360,19 +358,19 @@ em {
 
 .hero__name {
   font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(60px, 12vw, 148px);
+  font-weight: 600;
+  font-size: 112px;
   line-height: 0.95;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   margin: 0;
   color: var(--text);
 }
 
 .hero__lede {
   font-family: var(--serif);
-  font-size: clamp(22px, 2.6vw, 32px);
+  font-size: 28px;
   line-height: 1.35;
-  letter-spacing: -0.005em;
+  letter-spacing: 0;
   color: var(--text);
   max-width: 24ch;
   margin: clamp(28px, 4vw, 42px) 0 0;
@@ -848,6 +846,12 @@ em {
 .goodie-card__link:hover {
   color: var(--accent);
   border-color: var(--accent);
+}
+.goodie-card__app-icon {
+  width: 21px;
+  height: 21px;
+  border-radius: 5px;
+  object-fit: cover;
 }
 .goodie-card__title {
   font-family: var(--mono);
@@ -1565,57 +1569,17 @@ a.contact__info-value:hover { color: var(--accent); }
   z-index: 0;
 }
 
-.hero__cloud {
+.hero__sky::before {
+  content: "";
   position: absolute;
-  fill: var(--text-muted);
-  opacity: 0.10;
-  will-change: transform;
-}
-[data-theme="dark"] .hero__cloud {
-  fill: var(--text-muted);
-  opacity: 0.09;
+  inset: 12% 0 5%;
+  background-image: linear-gradient(to right, color-mix(in oklab, var(--accent) 12%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--accent) 12%, transparent) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to right, #000 0%, transparent 74%);
 }
 
-.hero__cloud--1 {
-  width: 280px;
-  top: 22%;
-  left: -200px;
-  animation: cloudDrift 65s linear infinite;
-}
-.hero__cloud--2 {
-  width: 380px;
-  top: 6%;
-  left: -300px;
-  opacity: 0.07;
-  animation: cloudDrift 90s linear infinite;
-  animation-delay: -22s;
-}
-[data-theme="dark"] .hero__cloud--2 { opacity: 0.10; }
-
-.hero__cloud--3 {
-  width: 220px;
-  top: 58%;
-  left: -180px;
-  opacity: 0.06;
-  animation: cloudDrift 75s linear infinite;
-  animation-delay: -50s;
-}
-[data-theme="dark"] .hero__cloud--3 { opacity: 0.09; }
-
-.hero__cloud--4 {
-  width: 320px;
-  top: 72%;
-  left: -260px;
-  opacity: 0.05;
-  animation: cloudDrift 100s linear infinite;
-  animation-delay: -75s;
-}
-[data-theme="dark"] .hero__cloud--4 { opacity: 0.08; }
-
-@keyframes cloudDrift {
-  0%   { transform: translateX(0)        translateY(0); }
-  50%  { transform: translateX(60vw)     translateY(-8px); }
-  100% { transform: translateX(120vw)    translateY(0); }
+.hero__cloud {
+  display: none;
 }
 
 /* ============================================================
@@ -1735,6 +1699,8 @@ a.contact__info-value:hover { color: var(--accent); }
 
 @media (max-width: 720px) {
   body { font-size: 16px; }
+  .hero__name { font-size: 44px; line-height: 1.2; overflow: visible; }
+  .hero-char { display: inline; opacity: 1; transform: none; animation: none; }
 
   .nav__links {
     position: fixed;
